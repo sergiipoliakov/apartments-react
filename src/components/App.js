@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
+import { uuid } from 'uuidv4';
 import Layout from './Layout';
-import Counter from './Counter';
 import TaskList from './TaskList';
 import TaskEditor from './TaskEditor';
-import createTask from '../utils/create-task';
+import Filter from './Filter';
 
 export default class App extends Component {
   state = {
     tasks: [],
+    filter: '',
+    firstName: 'Mango',
+    lastName: 'Zedog',
   };
-  addTask = () => {
-    const task = createTask();
+
+  addTask = text => {
+    const task = {
+      id: uuid(),
+      text,
+      completed: false,
+    };
 
     this.setState(prevState => {
       return {
@@ -18,6 +26,7 @@ export default class App extends Component {
       };
     });
   };
+
   removeTask = taskId => {
     this.setState(prevState => {
       return {
@@ -26,16 +35,63 @@ export default class App extends Component {
     });
   };
 
+  // updateCompleted = taskId => {
+  //   this.setState(prevState => {
+  //     return {
+  //       tasks: prevState.tasks.map(task => {
+  //         if (task.id === taskId) {
+  //           return {
+  //             ...task,
+  //             completed: !task.completed,
+  //           };
+  //         }
+
+  //         return task;
+  //       }),
+  //     };
+  //   });
+  // };
+
+  updateCompleted = taskId => {
+    this.setState(prevState => ({
+      tasks: prevState.tasks.map(task =>
+        task.id === taskId ? { ...task, completed: !task.completed } : task,
+      ),
+    }));
+  };
+
+  changeFilter = filter => {
+    this.setState({ filter });
+  };
+
+  getVisibleTasks = () => {
+    const { tasks, filter } = this.state;
+
+    return tasks.filter(task =>
+      task.text.toLowerCase().includes(filter.toLowerCase()),
+    );
+  };
+
   render() {
-    const { tasks } = this.state;
+    const { filter } = this.state;
+    const fullName = this.state.firstName + ' ' + this.state.lastName;
+
+    const visibleTasks = this.getVisibleTasks();
+
     return (
       <Layout>
+        <h1>{fullName}</h1>
         <TaskEditor onAddTask={this.addTask} />
-        {tasks.length > 0 && (
-          <TaskList tasks={tasks} onRemoveTask={this.removeTask} />
+        {visibleTasks.length > 1 && (
+          <Filter value={filter} onChangeFilter={this.changeFilter} />
         )}
-
-        <Counter step={5} />
+        {visibleTasks.length > 0 && (
+          <TaskList
+            tasks={visibleTasks}
+            onRemoveTask={this.removeTask}
+            onUpdateTask={this.updateCompleted}
+          />
+        )}
       </Layout>
     );
   }
