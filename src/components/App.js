@@ -74,6 +74,7 @@ export default class App extends Component {
 
   render() {
     const { filter } = this.state;
+
     const fullName = this.state.firstName + ' ' + this.state.lastName;
 
     const visibleTasks = this.getVisibleTasks();
@@ -82,6 +83,7 @@ export default class App extends Component {
       <Layout>
         <h1>{fullName}</h1>
         <TaskEditor onAddTask={this.addTask} />
+
         {visibleTasks.length > 1 && (
           <Filter value={filter} onChangeFilter={this.changeFilter} />
         )}
