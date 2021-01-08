@@ -1,54 +1,53 @@
 import React, { Component } from 'react';
-import { uuid } from 'uuidv4';
-import Layout from './Layout';
-// import Tasks from './Tasks/Tasks';
-// import Modal from './Modal/Modal';
-// import Clock from './Clock/Clock';
-import Tabs from './Tabs/Tabs';
-import tabs from '../tabs.json';
+import axios from 'axios';
 
 export default class App extends Component {
   state = {
-    showModal: false,
+    articles: [],
+    loading: false,
   };
-  toggleModal = () => {
-    this.setState(state => ({ showModal: !state.showModal }));
-  };
+
+  componentDidMount() {
+    this.setState({
+      loading: true,
+    });
+    axios
+      .get(
+        ' https://api.binance.com/api/v3/?symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559',
+      )
+      .then(response => {
+        console.dir(response);
+        this.setState({
+          articles: response.data,
+          loading: false,
+        });
+      });
+  }
 
   render() {
-    const { showModal } = this.state;
-
     return (
-      <Layout>
-        {/* <Tasks /> */}
-        {/* <div>
-          <button type="button" onClick={this.toggleModal}>
-            {showModal ? 'Hide' : 'Show'} Modal
-          </button>
-          {showModal && (
-            <Modal onClose={this.toggleModal}>
-              <h2>Modal title</h2>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae
-                aliquam, similique asperiores voluptates eos expedita modi
-                pariatur ipsa necessitatibus fuga harum! Animi, facilis
-                reiciendis nesciunt alias quo unde tempora. Natus eum delectus
-                porro placeat, praesentium, harum maiores sunt explicabo quidem,
-                excepturi nam repellendus officiis distinctio minima enim magnam
-                et accusamus.
-              </p>
-              <button type="button" onClick={this.toggleModal}>
-                close modal
-              </button>
-            </Modal>
-          )}
-        </div> */}
-        {/* <button type="button" onClick={this.toggleModal}>
-          {showModal ? 'Hide' : 'Show'} Clock
-        </button>
-        {showModal && <Clock />} */}
-        <Tabs items={tabs} />
-      </Layout>
+      <div>
+        <div>
+          {/* {
+            <ul>
+              {this.state.articles.map(article => (
+                <li>{article}</li>
+              ))}
+            </ul>
+          } */}
+        </div>
+        {/* {this.state.loading ? (
+          <div>Loading...</div>
+        ) : (
+          <ul>
+            {this.state.articles.map(article => (
+              <li key={article.objectID}>
+                <a href={article.url}>{article.title}</a>
+              </li>
+            ))}
+          </ul>
+        )} */}
+      </div>
     );
   }
 }
