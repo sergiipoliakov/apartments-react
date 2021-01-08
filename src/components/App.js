@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { uuid } from 'uuidv4';
+// import { uuid } from 'uuidv4';
 import Layout from './Layout';
 // import Tasks from './Tasks/Tasks';
 // import Modal from './Modal/Modal';
@@ -16,7 +16,7 @@ export default class App extends Component {
   };
 
   render() {
-    const { showModal } = this.state;
+    // const { showModal } = this.state;
 
     return (
       <Layout>

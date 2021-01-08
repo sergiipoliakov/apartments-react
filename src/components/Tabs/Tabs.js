@@ -4,11 +4,16 @@ export default class Tabs extends Component {
   state = {
     activeIdx: 1,
   };
+
   setActivTabIdx = idx => {
     this.setState({
       activeIdx: idx,
     });
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.activeIdx !== this.state.activeIdx;
+  }
 
   render() {
     const tab = this.props.items[this.state.activeIdx];
