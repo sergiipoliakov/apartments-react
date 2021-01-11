@@ -1,53 +1,69 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+
+import Spinner from './Spinner';
+import Notification from './Notification';
+import ArticleList from './ArticleList';
+import SearchForm from './SearchForm';
+
+import articlesApi from '../servises/articlesApi';
 
 export default class App extends Component {
   state = {
     articles: [],
     loading: false,
+    error: null,
+    searchQuery: '',
+    page: 0,
   };
 
   componentDidMount() {
-    this.setState({
-      loading: true,
-    });
-    axios
-      .get(
-        ' https://api.binance.com/api/v3/?symbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559',
+    // this.setState({
+    //   loading: true,
+    // });
+  }
+  fetchArticles = query => {
+    articlesApi
+      .fetchArticlesWithQuery(query)
+      .then(articles =>
+        this.setState(prevState => ({ articles, page: prevState.page + 1 })),
       )
-      .then(response => {
-        console.dir(response);
-        this.setState({
-          articles: response.data,
-          loading: false,
-        });
-      });
+      .catch(error => this.setState({ error }))
+      .finally(() => this.setState({ loading: false }));
+  };
+
+  handleSearchFormSubmit = query => {
+    this.setState({
+      searchQuery: query,
+    });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    const prevQuery = prevState.searchQuery;
+    const nextQuery = this.state.searchQuery;
+
+    if (prevQuery !== nextQuery) {
+      this.fetchArticles();
+    }
   }
 
   render() {
+    const { articles, loading, error } = this.state;
     return (
-      <div>
-        <div>
-          {/* {
-            <ul>
-              {this.state.articles.map(article => (
-                <li>{article}</li>
-              ))}
-            </ul>
-          } */}
-        </div>
-        {/* {this.state.loading ? (
-          <div>Loading...</div>
-        ) : (
-          <ul>
-            {this.state.articles.map(article => (
-              <li key={article.objectID}>
-                <a href={article.url}>{article.title}</a>
-              </li>
-            ))}
-          </ul>
-        )} */}
-      </div>
+      <>
+        <SearchForm onSubmit={this.handleSearchFormSubmit} />
+        {error && (
+          <Notification
+            message={`Whoops, something went wrong:${error.message}`}
+          />
+        )}
+        {loading && <Spinner message="Loading..." />}
+        {articles.length > 0 && <ArticleList articles={articles} />}
+        {articles.length > 0 && (
+          <button type="button" onClick={this.fetchArticles}>
+            Load more
+          </button>
+        )}
+      </>
     );
   }
 }
