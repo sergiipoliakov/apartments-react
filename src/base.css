@@ -36,3 +36,10 @@ button {
 label {
   cursor: pointer;
 }
+
+.Navigation-link {
+  color: #212121;
+}
+.Navigation-link-active {
+  color: palevioletred;
+}

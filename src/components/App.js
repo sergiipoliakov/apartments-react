@@ -1,69 +1,24 @@
-import React, { Component } from 'react';
+import Layout from './Layout';
+import { Switch, Route } from 'react-router-dom';
+import Navigation from './Navigation';
+import Home from '../views/Home';
+import NotFound from '../views/NotFound';
+import Shows from '../views/Shows';
+import ShowDetails from '../views/ShowDetails';
+import routes from '../routes';
 
-import Spinner from './Spinner';
-import Notification from './Notification';
-import ArticleList from './ArticleList';
-import SearchForm from './SearchForm';
+const App = () => (
+  <Layout>
+    <Navigation />
+    <hr />
+    <Switch>
+      <Route path={routes.home} exact component={Home} />
+      <Route path={routes.shows} exact component={Shows} />
+      <Route path={routes.showDetails} component={ShowDetails} />
 
-import articlesApi from '../servises/articlesApi';
+      <Route component={NotFound} />
+    </Switch>
+  </Layout>
+);
 
-export default class App extends Component {
-  state = {
-    articles: [],
-    loading: false,
-    error: null,
-    searchQuery: '',
-    page: 0,
-  };
-
-  componentDidMount() {
-    // this.setState({
-    //   loading: true,
-    // });
-  }
-  fetchArticles = query => {
-    articlesApi
-      .fetchArticlesWithQuery(query)
-      .then(articles =>
-        this.setState(prevState => ({ articles, page: prevState.page + 1 })),
-      )
-      .catch(error => this.setState({ error }))
-      .finally(() => this.setState({ loading: false }));
-  };
-
-  handleSearchFormSubmit = query => {
-    this.setState({
-      searchQuery: query,
-    });
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    const prevQuery = prevState.searchQuery;
-    const nextQuery = this.state.searchQuery;
-
-    if (prevQuery !== nextQuery) {
-      this.fetchArticles();
-    }
-  }
-
-  render() {
-    const { articles, loading, error } = this.state;
-    return (
-      <>
-        <SearchForm onSubmit={this.handleSearchFormSubmit} />
-        {error && (
-          <Notification
-            message={`Whoops, something went wrong:${error.message}`}
-          />
-        )}
-        {loading && <Spinner message="Loading..." />}
-        {articles.length > 0 && <ArticleList articles={articles} />}
-        {articles.length > 0 && (
-          <button type="button" onClick={this.fetchArticles}>
-            Load more
-          </button>
-        )}
-      </>
-    );
-  }
-}
+export default App;
