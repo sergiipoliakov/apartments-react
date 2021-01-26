@@ -1,6 +1,6 @@
 import Layout from './Layout';
 import { Switch, Route } from 'react-router-dom';
-import Navigation from './Navigation';
+
 import Home from '../views/Home';
 import NotFound from '../views/NotFound';
 import Shows from '../views/Shows';
@@ -9,8 +9,6 @@ import routes from '../routes';
 
 const App = () => (
   <Layout>
-    <Navigation />
-    <hr />
     <Switch>
       <Route path={routes.home} exact component={Home} />
       <Route path={routes.shows} exact component={Shows} />
