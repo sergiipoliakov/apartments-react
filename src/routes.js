@@ -5,4 +5,5 @@ export default {
   blog: '/blog',
   profile: '/profile',
   patterns: '/patterns',
+  counter: '/counter',
 };

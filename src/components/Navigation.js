@@ -55,6 +55,14 @@ const Navigation = () => (
     >
       Patterns
     </NavLink>
+
+    <NavLink
+      style={styles.link}
+      activeStyle={styles.activeLink}
+      to={routes.counter}
+    >
+      Counter
+    </NavLink>
   </nav>
 );
 

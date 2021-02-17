@@ -10,6 +10,7 @@ import ShowDetails from '../views/ShowDetails';
 import Blog from '../views/Blog';
 import Profile from '../views/Profile';
 import Patterns from '../views/Patterns';
+import Counter from '../components/Counter';
 import routes from '../routes';
 import AuthContext from '../contexts/Auth';
 
@@ -27,6 +28,7 @@ export default class App extends Component {
             <Route path={routes.profile} component={Profile} />
 
             <Route path={routes.patterns} component={Patterns} />
+            <Route path={routes.counter} component={Counter} />
 
             <Route component={NotFound} />
           </Switch>
