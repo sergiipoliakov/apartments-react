@@ -6,4 +6,5 @@ export default {
   profile: '/profile',
   patterns: '/patterns',
   counter: '/counter',
+  todos: '/todos',
 };

@@ -63,6 +63,13 @@ const Navigation = () => (
     >
       Counter
     </NavLink>
+    <NavLink
+      style={styles.link}
+      activeStyle={styles.activeLink}
+      to={routes.todos}
+    >
+      Todos
+    </NavLink>
   </nav>
 );
 
