@@ -5,7 +5,7 @@ import todosReducer from './todos/todos-reducer';
 
 const rootReducer = combineReducers({
   counter: counterReducer,
-  // todos: todosReducer,
+  todos: todosReducer,
 });
 
 const store = createStore(rootReducer, composeWithDevTools());

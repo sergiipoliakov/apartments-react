@@ -17,4 +17,9 @@ const deleteTodo = todoId => ({
   payload: todoId,
 });
 
-export default { addTodo };
+const changeFilter = value => ({
+  type: types.CHANGE_FILTER,
+  payload: value,
+});
+
+export default { addTodo, deleteTodo, changeFilter };

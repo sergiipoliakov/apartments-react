@@ -1,35 +1,53 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
+import Container from '../components/Container';
+import Filter from '../components/Todos/TodoFilter';
 import TodoEditor from '../components/Todos';
 import TodoModal from '../components/Modal/Modal';
 import TodoList from '../components/Todos/TodoList/TodoList';
 
 export default class TodosViews extends Component {
   state = {
-    todos: [],
-    filter: '',
+    // todos: [],
+    // filter: '',
     showModal: false,
   };
 
-  addTodo = (title, text) => {
-    const todo = {
-      id: shortid.generate(),
-      title,
-      text,
-      completed: false,
-    };
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.todos !== prevState.todos) {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    }
+  }
 
-    this.setState(({ todos }) => ({
-      todos: [todo, ...todos],
-    }));
-    this.toggleModal();
-  };
+  componentDidMount() {
+    const todos = localStorage.getItem('todos');
 
-  deleteTodo = todoId => {
-    this.setState(prevState => ({
-      todo: prevState.todos.filter(todo => todo.id !== todoId),
-    }));
-  };
+    const parsTodos = JSON.parse(todos);
+
+    if (parsTodos) {
+      this.setState({ todos: parsTodos });
+    }
+  }
+
+  // addTodo = (title, text) => {
+  //   const todo = {
+  //     id: shortid.generate(),
+  //     title,
+  //     text,
+  //     completed: false,
+  //   };
+
+  // this.setState(({ todos }) => ({
+  //   todos: [todo, ...todos],
+  // }));
+  // this.toggleModal();
+  // };
+
+  // deleteTodo = todoId => {
+  //   this.setState(prevState => ({
+  //     todos: prevState.todos.filter(todo => todo.id !== todoId),
+  //   }));
+  // };
 
   toggleModal = () => {
     this.setState({
@@ -47,13 +65,16 @@ export default class TodosViews extends Component {
 
     return (
       <div>
+        <div>
+          <Filter />
+        </div>
         {showModal && (
           <TodoModal closeModal={this.toggleModal}>
-            <TodoEditor onSubmit={this.addTodo} />
+            <TodoEditor />
           </TodoModal>
         )}
 
-        <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
+        <TodoList />
 
         <button type="button" onClick={this.toggleModal}>
           show Modal

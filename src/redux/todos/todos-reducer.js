@@ -5,6 +5,7 @@ const items = (state = [], { type, payload }) => {
   switch (type) {
     case types.ADD:
       return [...state, payload];
+
     case types.DELETE:
       return state.filter(todo => todo.id !== payload);
 
@@ -13,8 +14,14 @@ const items = (state = [], { type, payload }) => {
   }
 };
 
-const filter = (state = '', actions) => {
-  return state;
+const filter = (state = '', { type, payload }) => {
+  switch (type) {
+    case types.CHANGE_FILTER:
+      return payload;
+
+    default:
+      return state;
+  }
 };
 
 export default combineReducers({
