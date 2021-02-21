@@ -16,10 +16,12 @@ class TodoEditor extends Component {
       [name]: value,
     });
   };
+
   handleSubmit = event => {
     event.preventDefault();
     const { title, message } = this.state;
     const onSubmit = this.props.onSubmit;
+
     onSubmit(title, message);
     this.setState({
       title: '',
@@ -59,8 +61,7 @@ class TodoEditor extends Component {
 }
 
 const mapDipatchToProps = dispatch => ({
-  onSubmit: text => dispatch(todosActions.addTodo(text)),
+  onSubmit: (title, text) => dispatch(todosActions.addTodo(title, text)),
 });
 
 export default connect(null, mapDipatchToProps)(TodoEditor);
-// export default TodoEditor;
