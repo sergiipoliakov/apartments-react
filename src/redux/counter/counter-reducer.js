@@ -4,14 +4,11 @@ import actionsTypes from './counter-types';
 const valueReducer = (state = 10, { type, payload }) => {
   switch (type) {
     case actionsTypes.INCREMENT:
-      return {
-        value: state + payload,
-      };
+      return state + payload;
 
     case actionsTypes.DECREMENT:
-      return {
-        value: state - payload,
-      };
+      return state - payload;
+
     default:
       return state;
   }
