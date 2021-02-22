@@ -72,7 +72,7 @@ export default class TodosViews extends Component {
         </div>
         {showModal && (
           <TodoModal closeModal={this.toggleModal}>
-            <TodoEditor />
+            <TodoEditor onSave={this.toggleModal} />
           </TodoModal>
         )}
 

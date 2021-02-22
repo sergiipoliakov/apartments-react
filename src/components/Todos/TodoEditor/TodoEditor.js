@@ -23,6 +23,7 @@ class TodoEditor extends Component {
     const onSubmit = this.props.onSubmit;
 
     onSubmit(title, message);
+    this.props.onSave();
     this.setState({
       title: '',
 

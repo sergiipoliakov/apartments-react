@@ -28,10 +28,9 @@
   transition: transform 250ms;
 }
 
-/* .TodoList__item::before,
-  --completed::before {
-    transform: scaleX(1);
-  } */
+.TodoList__item--completed::before {
+  transform: scaleX(1);
+}
 
 .TodoList__text {
   margin-top: 0;
@@ -40,9 +39,9 @@
   margin-left: 24px;
 }
 
-/* .TodoList__item--completed & {
-    text-decoration: line-through;
-  } */
+.TodoList__item--completed {
+  text-decoration: line-through;
+}
 
 .TodoList__checkbox {
   cursor: pointer;
