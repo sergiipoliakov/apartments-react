@@ -5,12 +5,17 @@ import Todo from '../Todo';
 import todosActions from '../../../redux/todos/todos-actions';
 import './TodoLisi.css';
 
-const TodoList = ({ todos, onDeleteTodo }) => {
+const TodoList = ({ todos, onDeleteTodo, onToggleCompleted }) => {
   return (
     <ul className="TodoList">
       {todos.map(({ id, title, text }) => (
         <li className="TodoList__item" key={id}>
-          <Todo text={text} title={title} onDelete={() => onDeleteTodo(id)} />
+          <Todo
+            text={text}
+            title={title}
+            onDelete={() => onDeleteTodo(id)}
+            onToggleCompleted={() => onToggleCompleted(id)}
+          />
         </li>
       ))}
     </ul>
@@ -36,6 +41,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onDeleteTodo: id => dispatch(todosActions.deleteTodo(id)),
+  onToggleCompleted: id => dispatch(todosActions.toggleComleted(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

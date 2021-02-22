@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import shortid from 'shortid';
 import Container from '../components/Container';
 import Filter from '../components/Todos/TodoFilter';
+import Stats from '../components/Todos/Stats';
 import TodoEditor from '../components/Todos';
 import TodoModal from '../components/Modal/Modal';
 import TodoList from '../components/Todos/TodoList/TodoList';
@@ -67,6 +68,7 @@ export default class TodosViews extends Component {
       <div>
         <div>
           <Filter />
+          <Stats />
         </div>
         {showModal && (
           <TodoModal closeModal={this.toggleModal}>
