@@ -7,6 +7,7 @@ export default function Todo({ title, text, onDelete, onToggleCompleted }) {
         onChange={onToggleCompleted}
       />
       <h1 className="TodoList__text">{title}</h1>
+
       <p className="TodoList__text">{text}</p>
       <button className="TodoList__btn" type="button" onClick={onDelete}>
         Delete Todo

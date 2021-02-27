@@ -1,54 +1,31 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import shortid from 'shortid';
+import IconButton from '../components/IconButton';
 import Container from '../components/Container';
 import Filter from '../components/Todos/TodoFilter';
 import Stats from '../components/Todos/Stats';
 import TodoEditor from '../components/Todos';
 import TodoModal from '../components/Modal/Modal';
-import TodoList from '../components/Todos/TodoList/TodoList';
+import TodoList from '../components/Todos/TodoList';
+import { ReactComponent as AddIcon } from '../icons/add.svg';
+import todosOperations from '../redux/todos/todos-operations';
 
-export default class TodosViews extends Component {
+const barStyles = {
+  display: 'flex',
+  alignItems: 'flex-end',
+  marginBottom: 20,
+};
+
+class TodosViews extends Component {
   state = {
-    // todos: [],
-    // filter: '',
     showModal: false,
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.todos !== prevState.todos) {
-      localStorage.setItem('todos', JSON.stringify(this.state.todos));
-    }
-  }
-
   componentDidMount() {
-    const todos = localStorage.getItem('todos');
-
-    const parsTodos = JSON.parse(todos);
-
-    if (parsTodos) {
-      this.setState({ todos: parsTodos });
-    }
+    this.props.fetchTodos();
   }
-
-  // addTodo = (title, text) => {
-  //   const todo = {
-  //     id: shortid.generate(),
-  //     title,
-  //     text,
-  //     completed: false,
-  //   };
-
-  // this.setState(({ todos }) => ({
-  //   todos: [todo, ...todos],
-  // }));
-  // this.toggleModal();
-  // };
-
-  // deleteTodo = todoId => {
-  //   this.setState(prevState => ({
-  //     todos: prevState.todos.filter(todo => todo.id !== todoId),
-  //   }));
-  // };
 
   toggleModal = () => {
     this.setState({
@@ -56,32 +33,38 @@ export default class TodosViews extends Component {
     });
   };
 
-  getVisibleTodos = () => {
-    const todos = this.state.todos;
-    return todos;
-  };
-
   render() {
-    const { todos, showModal } = this.state;
+    const { showModal } = this.state;
 
     return (
-      <div>
-        <div>
+      <Container>
+        <div style={barStyles}>
           <Filter />
           <Stats />
+          <IconButton onClick={this.toggleModal} aria-label="Добавить todo">
+            <AddIcon width="40" height="40" fill="#fff" />
+          </IconButton>
+
+          {showModal && (
+            <TodoModal closeModal={this.toggleModal}>
+              <TodoEditor onSave={this.toggleModal} />
+            </TodoModal>
+          )}
+          {this.props.isLoadingTodos && <h1>Загружаем...</h1>}
         </div>
-        {showModal && (
-          <TodoModal closeModal={this.toggleModal}>
-            <TodoEditor onSave={this.toggleModal} />
-          </TodoModal>
-        )}
 
         <TodoList />
-
-        <button type="button" onClick={this.toggleModal}>
-          show Modal
-        </button>
-      </div>
+      </Container>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  isLoadingTodos: state.todos.loading,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchTodos: () => dispatch(todosOperations.fetchTodos()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodosViews);

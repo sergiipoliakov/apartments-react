@@ -5,8 +5,8 @@ import {
 } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import {
-  persistStore,
-  persistReducer,
+  // persistStore,
+  // persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -14,15 +14,10 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+// import storage from 'redux-persist/lib/storage';
 
-import counterReducer from './counter/counter-reducer';
+// import counterReducer from './counter/counter-reducer';
 import todosReducer from './todos/todos-reducer';
-
-// const persistConfig = {
-//   key: 'hello',
-//   storage,
-// };
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -30,23 +25,24 @@ const middleware = [
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
+
   logger,
 ];
 
-const counterPersistConfig = {
-  key: 'counter',
-  storage,
-};
+// const counterPersistConfig = {
+//   key: 'counter',
+//   storage,
+// };
 
-const todoPersistConfig = {
-  key: 'todos',
-  storage,
-  blacklist: ['filter'],
-};
+// const todoPersistConfig = {
+//   key: 'todos',
+//   storage,
+//   blacklist: ['filter'],
+// };
 
 const rootReducer = combineReducers({
-  counter: persistReducer(counterPersistConfig, counterReducer),
-  todos: persistReducer(todoPersistConfig, todosReducer),
+  // counter: persistReducer(counterPersistConfig, counterReducer),
+  todos: todosReducer,
 });
 
 // const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -57,6 +53,6 @@ const store = configureStore({
   devTools: process.env.NODE_ENV === 'development',
 });
 
-const persistor = persistStore(store);
+// const persistor = persistStore(store);
 
-export default { store, persistor };
+export default store;

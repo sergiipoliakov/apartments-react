@@ -10,7 +10,7 @@ import ShowDetails from '../views/ShowDetails';
 import Blog from '../views/Blog';
 import Profile from '../views/Profile';
 import Patterns from '../views/Patterns';
-import Counter from './Counter';
+// import Counter from './Counter';
 import TodosViews from '../views/TodosViews';
 import routes from '../routes';
 import AuthContext from '../contexts/Auth';
@@ -29,7 +29,7 @@ export default class App extends Component {
             <Route path={routes.profile} component={Profile} />
 
             <Route path={routes.patterns} component={Patterns} />
-            <Route path={routes.counter} component={Counter} />
+            {/* <Route path={routes.counter} component={Counter} /> */}
             <Route path={routes.todos} component={TodosViews} />
 
             <Route component={NotFound} />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import todosActions from '../../../redux/todos/todos-actions';
-import './TodoEditor.css';
+import todosOperations from '../../../redux/todos/todos-operations';
+import './TodoEditor.scss';
 
 class TodoEditor extends Component {
   state = {
@@ -52,8 +52,8 @@ class TodoEditor extends Component {
             value={message}
             onChange={this.handleChange}
           />
-          <button className="TodoEditor__button" type="submit">
-            Add todo!
+          <button type="submit" className="TodoEditor__button">
+            Сохранить
           </button>
         </form>
       </div>
@@ -62,7 +62,7 @@ class TodoEditor extends Component {
 }
 
 const mapDipatchToProps = dispatch => ({
-  onSubmit: (title, text) => dispatch(todosActions.addTodo(title, text)),
+  onSubmit: (title, text) => dispatch(todosOperations.addTodo(title, text)),
 });
 
 export default connect(null, mapDipatchToProps)(TodoEditor);
