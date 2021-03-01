@@ -11,6 +11,7 @@ import TodoModal from '../components/Modal/Modal';
 import TodoList from '../components/Todos/TodoList';
 import { ReactComponent as AddIcon } from '../icons/add.svg';
 import todosOperations from '../redux/todos/todos-operations';
+import todosSelectors from '../redux/todos/todos-selectors';
 
 const barStyles = {
   display: 'flex',
@@ -60,7 +61,7 @@ class TodosViews extends Component {
 }
 
 const mapStateToProps = state => ({
-  isLoadingTodos: state.todos.loading,
+  isLoadingTodos: todosSelectors.getLoading(state),
 });
 
 const mapDispatchToProps = dispatch => ({

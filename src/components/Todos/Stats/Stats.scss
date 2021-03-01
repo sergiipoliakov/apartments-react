@@ -9,9 +9,10 @@
   flex-direction: column;
   margin: 0;
   text-align: center;
-}
-.Stats__item:not(:last-child) {
-  margin-right: 15px;
+
+  &:not(:last-child) {
+    margin-right: 15px;
+  }
 }
 
 .Stats__value {
