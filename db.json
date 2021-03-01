@@ -3,7 +3,7 @@
     {
       "text": "qweqwe",
       "title": "Привыкнуть к Redux",
-      "completed": false,
+      "completed": true,
       "id": "rgkrUOs"
     },
     {
@@ -19,7 +19,7 @@
     },
     {
       "text": "sdfsfsdf",
-      "completed": true,
+      "completed": false,
       "id": "-qW2ELn"
     },
     {
@@ -29,7 +29,7 @@
     },
     {
       "text": "title",
-      "completed": false,
+      "completed": true,
       "id": "-1CjH8m"
     },
     {
@@ -41,12 +41,6 @@
       "text": "dsdfs",
       "completed": false,
       "id": "LfmSh8K"
-    },
-    {
-      "title": "1",
-      "text": "2",
-      "completed": false,
-      "id": "7tsFvv2"
     },
     {
       "title": "sasdas",

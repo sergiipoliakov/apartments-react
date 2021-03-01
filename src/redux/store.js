@@ -3,7 +3,7 @@ import {
   getDefaultMiddleware,
   combineReducers,
 } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import {
   // persistStore,
   // persistReducer,
@@ -26,7 +26,7 @@ const middleware = [
     },
   }),
 
-  logger,
+  // logger,
 ];
 
 // const counterPersistConfig = {

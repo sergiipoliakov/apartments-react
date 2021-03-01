@@ -15,13 +15,24 @@ const getCompeltedTodosCount = state => {
 };
 
 const getVisivleTodos = state => {
-  const todos = getAllTodos(state);
-  const filter = getFilter(state);
-  const normalizedFilter = filter.toLowerCase();
+  // const todos = getAllTodos(state);
+  // const filter = getFilter(state);
+  const { items, filter } = state.todos;
+  console.log(filter);
+  // const filterd = filter.toLowerCase();
+  if (filter) {
+    const filteredTodos = items.filter(todo =>
+      todo.title.toLowerCase().includes(filter.toLowerCase()),
+    );
+    return {
+      filteredTodos: filteredTodos,
+    };
+  }
+  return items;
 
-  return todos.filter(({ text }) =>
-    text.toLowerCase().includes(normalizedFilter),
-  );
+  // return items.filter(({ text }) =>
+  //   text.toLowerCase().includes(normalizedFilter),
+  // );
 };
 
 export default {
