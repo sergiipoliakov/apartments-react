@@ -14,10 +14,11 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import counterButtonReducer from './counterButton';
 // import storage from 'redux-persist/lib/storage';
 
 // import counterReducer from './counter/counter-reducer';
-import todosReducer from './todos/todos-reducer';
+import { todosReducer } from './todos';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -43,6 +44,7 @@ const middleware = [
 const rootReducer = combineReducers({
   // counter: persistReducer(counterPersistConfig, counterReducer),
   todos: todosReducer,
+  counterButton: counterButtonReducer,
 });
 
 // const persistedReducer = persistReducer(persistConfig, rootReducer);

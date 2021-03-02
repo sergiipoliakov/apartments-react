@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import TodoList from './TodoList';
-import todosOperations from '../../../redux/todos/todos-operations';
-import todosSelectors from '../../../redux/todos/todos-selectors';
+import { todosOperations, todosSelectors } from '../../../redux/todos';
 
 const mapStateToProps = state => ({
   todos: todosSelectors.getVisivleTodos(state),

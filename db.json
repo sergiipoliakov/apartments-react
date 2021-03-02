@@ -1,43 +1,6 @@
 {
   "todos": [
     {
-      "text": "qweqwe",
-      "title": "Привыкнуть к Redux",
-      "completed": true,
-      "id": "rgkrUOs"
-    },
-    {
-      "title": "seqweq",
-      "text": "wqeqwe",
-      "completed": true,
-      "id": "g2dlwS1"
-    },
-    {
-      "title": "eqweqwe",
-      "completed": false,
-      "id": "bZMUiqp"
-    },
-    {
-      "text": "sdfsfsdf",
-      "completed": false,
-      "id": "-qW2ELn"
-    },
-    {
-      "text": "sfdsfsdf",
-      "completed": false,
-      "id": "ZXkF0vQ"
-    },
-    {
-      "text": "title",
-      "completed": true,
-      "id": "-1CjH8m"
-    },
-    {
-      "text": "1",
-      "completed": true,
-      "id": "YtFleCz"
-    },
-    {
       "text": "dsdfs",
       "completed": false,
       "id": "LfmSh8K"
@@ -141,7 +104,7 @@
     {
       "title": "erewrwe",
       "text": "wrwerwer",
-      "completed": false,
+      "completed": true,
       "id": "AOlcMhz"
     },
     {
@@ -149,12 +112,6 @@
       "text": "qewqweqwe",
       "completed": true,
       "id": "T8Lv9m3"
-    },
-    {
-      "title": "asdasdas",
-      "text": "asdasdasd",
-      "completed": true,
-      "id": "ep3_PUz"
     },
     {
       "title": "werwerwe",
@@ -165,13 +122,13 @@
     {
       "title": "",
       "text": "",
-      "completed": false,
+      "completed": true,
       "id": "kWXDLfx"
     },
     {
       "title": "",
       "text": "",
-      "completed": false,
+      "completed": true,
       "id": "2qcjUrJ"
     },
     {
@@ -179,6 +136,12 @@
       "text": "",
       "completed": false,
       "id": "BvO2xFk"
+    },
+    {
+      "title": "asdasd",
+      "text": "asdasdasd\n",
+      "completed": false,
+      "id": "LjqMncL"
     }
   ]
 }

@@ -1,9 +1,16 @@
-export default function Todo({ title, text, onDelete, onToggleCompleted }) {
+export default function Todo({
+  title,
+  text,
+  onDelete,
+  completed,
+  onToggleCompleted,
+}) {
   return (
     <>
       <input
         className="TodoList__checkbox"
         type="checkbox"
+        checked={completed}
         onChange={onToggleCompleted}
       />
       <h1 className="TodoList__text">{title}</h1>

@@ -10,8 +10,8 @@ import TodoEditor from '../components/Todos';
 import TodoModal from '../components/Modal/Modal';
 import TodoList from '../components/Todos/TodoList';
 import { ReactComponent as AddIcon } from '../icons/add.svg';
-import todosOperations from '../redux/todos/todos-operations';
-import todosSelectors from '../redux/todos/todos-selectors';
+import { todosSelectors, todosOperations } from '../redux/todos';
+import CounterButton from '../components/CounterButton';
 
 const barStyles = {
   display: 'flex',
@@ -52,6 +52,7 @@ class TodosViews extends Component {
             </TodoModal>
           )}
           {this.props.isLoadingTodos && <h1>Загружаем...</h1>}
+          <CounterButton />
         </div>
 
         <TodoList />
