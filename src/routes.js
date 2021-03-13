@@ -7,4 +7,6 @@ export default {
   patterns: '/patterns',
   counter: '/counter',
   todos: '/todos',
+  login: '/login',
+  register: '/register',
 };

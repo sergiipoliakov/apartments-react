@@ -5,8 +5,8 @@ import {
 } from '@reduxjs/toolkit';
 // import logger from 'redux-logger';
 import {
-  // persistStore,
-  // persistReducer,
+  persistStore,
+  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -15,10 +15,11 @@ import {
   REGISTER,
 } from 'redux-persist';
 import counterButtonReducer from './counterButton';
-// import storage from 'redux-persist/lib/storage';
+import storage from 'redux-persist/lib/storage';
 
 // import counterReducer from './counter/counter-reducer';
 import { todosReducer } from './todos';
+import { authReducer } from './auth';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -40,9 +41,15 @@ const middleware = [
 //   storage,
 //   blacklist: ['filter'],
 // };
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+};
 
 const rootReducer = combineReducers({
   // counter: persistReducer(counterPersistConfig, counterReducer),
+  auth: persistReducer(authPersistConfig, authReducer),
   todos: todosReducer,
   counterButton: counterButtonReducer,
 });
@@ -55,6 +62,6 @@ const store = configureStore({
   devTools: process.env.NODE_ENV === 'development',
 });
 
-// const persistor = persistStore(store);
+const persistor = persistStore(store);
 
-export default store;
+export default { store, persistor };

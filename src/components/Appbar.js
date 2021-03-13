@@ -1,8 +1,11 @@
 import Navigation from './Navigation';
-import UserMenu from './UserMenu';
+import UserMenu from './UserMenu/UserMenu';
+import AuthNav from './AuthNav';
+import { authSelectors } from '../redux/auth';
+import { connect } from 'react-redux';
 
 const style = {
-  container: {
+  header: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -10,10 +13,15 @@ const style = {
   },
 };
 
-const Appbar = () => (
-  <header style={style.container}>
+const Appbar = ({ isAuthenticated }) => (
+  <header style={style.header}>
     <Navigation />
-    <UserMenu />
+    {isAuthenticated ? <UserMenu /> : <AuthNav />}
   </header>
 );
-export default Appbar;
+
+const mapStateToProps = state => ({
+  isAuthenticated: authSelectors.getIsAuthenticated(state),
+});
+
+export default connect(mapStateToProps)(Appbar);

@@ -14,8 +14,16 @@ import Patterns from '../views/Patterns';
 import TodosViews from '../views/TodosViews';
 import routes from '../routes';
 import AuthContext from '../contexts/Auth';
+import LoginView from '../views/LoginView';
+import RegisterView from '../views/RegisterView';
+import { authOperations } from '../redux/auth';
+import { connect } from 'react-redux';
 
-export default class App extends Component {
+class App extends Component {
+  componentDidMount() {
+    this.props.onGetCurrentUser();
+  }
+
   render() {
     return (
       <AuthContext>
@@ -27,6 +35,8 @@ export default class App extends Component {
             <Route path={routes.blog} component={Blog} />
 
             <Route path={routes.profile} component={Profile} />
+            <Route path={routes.login} component={LoginView} />
+            <Route path={routes.register} component={RegisterView} />
 
             <Route path={routes.patterns} component={Patterns} />
             {/* <Route path={routes.counter} component={Counter} /> */}
@@ -39,3 +49,12 @@ export default class App extends Component {
     );
   }
 }
+// const mapStateToProps = (state) => ({
+
+// })
+
+const mapDispatchToProps = {
+  onGetCurrentUser: authOperations.getCurrentUser,
+};
+
+export default connect(null, mapDispatchToProps)(App);

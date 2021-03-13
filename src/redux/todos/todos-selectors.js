@@ -21,8 +21,8 @@ const getVisivleTodos = createSelector(
   [getAllTodos, getFilter],
   (todos, filter) => {
     const normalizedFilter = filter.toLowerCase();
-    return todos.filter(({ text }) =>
-      text.toLowerCase().includes(normalizedFilter),
+    return todos.filter(({ description }) =>
+      description.toLowerCase().includes(normalizedFilter),
     );
   },
 );

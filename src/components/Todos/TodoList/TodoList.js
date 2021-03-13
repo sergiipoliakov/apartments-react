@@ -5,7 +5,7 @@ import './TodoLisi.scss';
 
 const TodoList = ({ todos, onDeleteTodo, onToggleCompleted }) => (
   <ul className="TodoList">
-    {todos.map(({ id, title, text, completed }) => (
+    {todos.map(({ id, title, description, completed }) => (
       <li
         key={id}
         className={classNames('TodoList__item', {
@@ -14,7 +14,7 @@ const TodoList = ({ todos, onDeleteTodo, onToggleCompleted }) => (
       >
         <Todo
           title={title}
-          text={text}
+          text={description}
           completed={completed}
           onToggleCompleted={() =>
             onToggleCompleted({ id, completed: !completed })
