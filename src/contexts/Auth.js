@@ -3,12 +3,12 @@ import userAPI from '../servises/user-api';
 
 const Context = createContext();
 
-const user = {
-  name: 'Mango',
-  email: 'mango@mail.com',
-  avatar:
-    'https://icon-library.net/images/avatar-icon-images/avatar-icon-images-7.jpg',
-};
+// const user = {
+//   name: 'Mango',
+//   email: 'mango@mail.com',
+//   avatar:
+//     'https://icon-library.net/images/avatar-icon-images/avatar-icon-images-7.jpg',
+// };
 
 export default class AuthContext extends Component {
   static Consumer = Context.Consumer;
