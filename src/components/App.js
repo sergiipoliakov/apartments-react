@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 
 import Layout from './Layout';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from '../views/Home';
 import NotFound from '../views/NotFound';
 import Shows from '../views/Shows';
 import ShowDetails from '../views/ShowDetails';
@@ -11,13 +10,17 @@ import Blog from '../views/Blog';
 import Profile from '../views/Profile';
 import Patterns from '../views/Patterns';
 // import Counter from './Counter';
-import TodosViews from '../views/TodosViews';
 import routes from '../routes';
 import AuthContext from '../contexts/Auth';
-import LoginView from '../views/LoginView';
-import RegisterView from '../views/RegisterView';
 import { authOperations } from '../redux/auth';
 import { connect } from 'react-redux';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
+
+const Home = lazy(() => import('../views/Home'));
+const LoginView = lazy(() => import('../views/LoginView'));
+const RegisterView = lazy(() => import('../views/RegisterView'));
+const TodosViews = lazy(() => import('../views/TodosViews'));
 
 class App extends Component {
   componentDidMount() {
@@ -28,22 +31,38 @@ class App extends Component {
     return (
       <AuthContext>
         <Layout>
-          <Switch>
-            <Route path={routes.home} exact component={Home} />
-            <Route path={routes.shows} exact component={Shows} />
-            <Route path={routes.showDetails} component={ShowDetails} />
-            <Route path={routes.blog} component={Blog} />
+          <Suspense fallback={<p>Загружаю...</p>}>
+            <Switch>
+              <PublicRoute path={routes.home} exact component={Home} />
+              <Route path={routes.shows} exact component={Shows} />
+              <Route path={routes.showDetails} component={ShowDetails} />
+              <Route path={routes.blog} component={Blog} />
 
-            <Route path={routes.profile} component={Profile} />
-            <Route path={routes.login} component={LoginView} />
-            <Route path={routes.register} component={RegisterView} />
+              <Route path={routes.profile} component={Profile} />
+              <PublicRoute
+                path={routes.login}
+                component={LoginView}
+                redirectTo={routes.todos}
+                restricted
+              />
+              <PublicRoute
+                path={routes.register}
+                component={RegisterView}
+                redirectTo={routes.todos}
+                restricted
+              />
 
-            <Route path={routes.patterns} component={Patterns} />
-            {/* <Route path={routes.counter} component={Counter} /> */}
-            <Route path={routes.todos} component={TodosViews} />
+              <Route path={routes.patterns} component={Patterns} />
+              {/* <Route path={routes.counter} component={Counter} /> */}
+              <PrivateRoute
+                path={routes.todos}
+                component={TodosViews}
+                redirectTo={routes.login}
+              />
 
-            <Route component={NotFound} />
-          </Switch>
+              <Route component={NotFound} />
+            </Switch>
+          </Suspense>
         </Layout>
       </AuthContext>
     );

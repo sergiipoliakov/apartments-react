@@ -1,5 +1,5 @@
-import { Component, useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { Component } from 'react';
+import { connect } from 'react-redux';
 import { authOperations } from '../redux/auth';
 
 const styles = {
@@ -14,11 +14,6 @@ const styles = {
 };
 
 class RegisterView extends Component {
-  //   const dispatch = useDispatch();
-  //   const [name, setName] = useState('');
-  //   const [email, setEmail] = useState('');
-  //   const [password, setPassword] = useState('');
-
   state = {
     name: '',
     email: '',
@@ -26,25 +21,12 @@ class RegisterView extends Component {
   };
 
   handleChange = ({ target: { name, value } }) => {
-    // switch (name) {
-    //   case 'name':
-    //     return setName(value);
-    //   case 'email':
-    //     return setEmail(value);
-    //   case 'password':
-    //     return setPassword(value);
-    //   default:
-    //     return;
-    // }
     this.setState({ [name]: value });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    // dispatch(authOperations.register({ name, email, password }));
-    // setName('');
-    // setEmail('');
-    // setPassword('');
+
     this.props.onRegister(this.state);
 
     this.setState({

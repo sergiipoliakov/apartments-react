@@ -1,6 +1,5 @@
 import MyComponent from '../components/MyComponent';
 import Toggler from '../components/Toggler';
-import Posts from '../components/Posts';
 
 const Patterns = () => (
   <>
