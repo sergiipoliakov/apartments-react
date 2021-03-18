@@ -25,6 +25,13 @@ const Navigation = () => (
     >
       Home
     </NavLink>
+    <NavLink
+      style={styles.link}
+      activeStyle={styles.activeLink}
+      to={routes.signup}
+    >
+      Sign up
+    </NavLink>
 
     <NavLink
       style={styles.link}
@@ -39,6 +46,34 @@ const Navigation = () => (
       to={routes.blog}
     >
       Blog
+    </NavLink>
+    <NavLink
+      style={styles.link}
+      activeStyle={styles.activeLink}
+      to={routes.counter}
+    >
+      Counter
+    </NavLink>
+    <NavLink
+      style={styles.link}
+      activeStyle={styles.activeLink}
+      to={routes.clock}
+    >
+      Clock
+    </NavLink>
+    <NavLink
+      style={styles.link}
+      activeStyle={styles.activeLink}
+      to={routes.news}
+    >
+      News
+    </NavLink>
+    <NavLink
+      style={styles.link}
+      activeStyle={styles.activeLink}
+      to={routes.todos}
+    >
+      Todos
     </NavLink>
     <NavLink
       style={styles.link}
